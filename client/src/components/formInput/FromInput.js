@@ -1,7 +1,7 @@
 function FromInput() {
 
     function hanleChange() {
-        
+
     }
 
     function handleSubmit(){
@@ -16,6 +16,7 @@ function FromInput() {
                 <option>music</option>
                 <option>movie</option>
             </select>
+            <input type="submit" name="submit">search</input>
         </form>
     );
 }
