@@ -9,13 +9,14 @@ app.use(helmet());
 
 async function fetchingSearchData(term, media) { 
     const response = await fetch(`https://itunes.apple.com/search?term=${term}&&media=${media}&&limit=25`);
-    response.then(res => {return res.json()});
+    const data = await response.json();
 //    console.log(data.results[0])
-//    return data;
+    return await data;
 }
 
 router.get("/", (req , res) => {
     const bodyResponse = req.body
+    console.log(bodyResponse);
     const searchList = fetchingSearchData(bodyResponse.term, bodyResponse.media);
     console.log(searchList);
     res.json(searchList);
