@@ -4,6 +4,7 @@
   "description": "search for items in the app store ",
   "main": "app.js",
   "scripts": {
+    "client-install": "cd client && npm install",
     "server": "nodemon server.js",
     "start": "npm run server && cd config && nodemon app.js"
   },
