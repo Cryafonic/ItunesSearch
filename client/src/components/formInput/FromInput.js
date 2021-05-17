@@ -1,5 +1,5 @@
 import react, { useState } from "react";
-import { FetchParams } from "../fetchParams/FetchParams";
+import { FetchParams } from "../fetchMethods/FetchParams";
 import Button from 'react-bootstrap/Button'
 
 function FromInput() {

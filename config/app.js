@@ -23,11 +23,11 @@ async function fetchingSearchData(term, media) {
     }
 }
 
-app.get("/", (req, res)=> {
-    fs.readFile("Itunes_response.json", (err, data) => {
-        if (err) return err
+app.get("/search/results", (req, res)=> {
+    fs.readFile('itunesResponse.json', (err, data) => {
+        if (err) res.send("file not found.");
         else 
-            res.send(`${data}`);
+            res.send(JSON.parse(data));
     });
 });
 
@@ -36,7 +36,7 @@ app.post("/search/", (req , res) => {
     console.log(bodyResponse);
     fetchingSearchData(bodyResponse.input, bodyResponse.select)
         .then(res => {
-            fs.writeFile('Itunes_response.json', JSON.stringify(res.results), (err) => {
+            fs.writeFile('itunesResponse.json', JSON.stringify(res), (err) => {
                 if (err) return console.log(err);
             });
         });
