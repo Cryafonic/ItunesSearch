@@ -6,8 +6,9 @@
   "scripts": {
     "client-install": "cd client && npm install",
     "client": "cd client && npm start",
+    "altserver": "cd config && nodemon app.js",
     "server": "nodemon server.js",
-    "start": "concurrently \"npm run client\" \"npm run server\""
+    "start": "concurrently \"npm run client\" \"npm run altserver\""
   },
   "author": "",
   "license": "ISC",

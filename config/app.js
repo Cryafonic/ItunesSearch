@@ -1,25 +1,47 @@
 const helmet = require('helmet');
 const express = require('express');
-const router = express.Router();
+// const router = express.Router();
+const fs = require("fs");
 const fetch = require("node-fetch");
+const PORT = process.env.PORT || 8080
 
 const app = express();
+
+app.use(express.urlencoded({ extended: false }));
+
+app.use(express.json());
 
 app.use(helmet());
 
 async function fetchingSearchData(term, media) { 
-    const response = await fetch(`https://itunes.apple.com/search?term=${term}&&media=${media}&&limit=25`);
-    const data = await response.json();
-//    console.log(data.results[0])
-    return await data;
+    const URL = `https://itunes.apple.com/search?term=${term}&&media=${media}&&limit=25`;
+    try{
+        const response = await fetch(URL).then(res => res.json());
+        return response;
+    }catch(err) {
+        return err
+    }
 }
 
-router.get("/", (req , res) => {
-    const bodyResponse = req.body
-    console.log(bodyResponse);
-    const searchList = fetchingSearchData(bodyResponse.term, bodyResponse.media);
-    console.log(searchList);
-    res.json(searchList);
+app.get("/", (req, res)=> {
+    fs.readFile("Itunes_response.json", (err, data) => {
+        if (err) return err
+        else 
+            res.send(`${data}`);
+    });
 });
 
-module.exports = router;
+app.post("/search/", (req , res) => {
+    const bodyResponse = req.body.sendOptions
+    console.log(bodyResponse);
+    fetchingSearchData(bodyResponse.input, bodyResponse.select)
+        .then(res => {
+            fs.writeFile('Itunes_response.json', JSON.stringify(res.results), (err) => {
+                if (err) return console.log(err);
+            });
+        });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});

@@ -1,11 +1,17 @@
+import react, { useState } from "react";
 import { FetchParams } from "../fetchParams/FetchParams";
+import Button from 'react-bootstrap/Button'
 
 function FromInput() {
     const [options, setOptions] = useState({
         input: "",
-        select: ""
+        select: "music"
     });
 
+    function sendSubmit(e) {
+        e.preventDefault()
+        handleSubmit(options)
+    }
     // handle the change input fields
     function handleChange(e) {
         const value = e.target.value;
@@ -15,27 +21,27 @@ function FromInput() {
         });
     }
     
-    // post the data to the backend
-    function handleSubmit() {
-        const get = { options }
+    function handleSubmit(sendOptions) {
+        const post = { sendOptions }
+        console.log(post);
         const options = {
-            method: "GET",
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(get)
+            body: JSON.stringify(post)
         };
         FetchParams(options)
     };
+
     return(
-        <form onSubmit={handleSubmit} >
-            <input type="input" name="term" onChange={handleChange} value={options.input}></input>
-            <lable>select media type</lable>
-            <select onChange={handleChange} >
-                <option name="select" value="music" >music</option>
-                <option name="select" value="movie" >movie</option>
+        <form onSubmit={sendSubmit} >
+            <input type="input" name="input" onChange={handleChange} value={options.input}></input>
+            <select onChange={handleChange} name="select">
+                <option value="music" >music</option>
+                <option value="movie" >movie</option>
             </select>
-            <input type="submit" name="submit">search</input>
+            <Button className="button" type="submit" variant="success" >Search</Button>
         </form>
     );
 }
