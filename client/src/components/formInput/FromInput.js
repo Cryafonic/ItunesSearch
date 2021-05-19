@@ -1,6 +1,7 @@
 import react, { useState } from "react";
 import { FetchParams } from "../fetchMethods/FetchParams";
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 function FromInput() {
     const [options, setOptions] = useState({
@@ -9,7 +10,7 @@ function FromInput() {
     });
 
     function sendSubmit(e) {
-        // e.preventDefault()
+        e.preventDefault()
         handleSubmit(options)
     }
     // handle the change input fields
@@ -36,19 +37,24 @@ function FromInput() {
 
     return(
         <form onSubmit={sendSubmit} >
-            <input type="input" name="input" onChange={handleChange} value={options.input} required></input>
-            <select onChange={handleChange} name="select">
-                <option value="music" >music</option>
-                <option value="movie" >movie</option>
-                <option value="podcast" >podcast</option>
-                <option value="musicVideo" >Music Video</option>
-                <option value="audiobook" >audio book</option>
-                <option value="shortFilm" >short Film</option>
-                <option value="tv Show" >tv Show</option>
-                <option value="software" >software</option>
-                <option value="ebook" >ebook</option>
-            </select>
-            <Button className="button" type="submit" variant="success" >Search</Button>
+            <Card>
+                <Card.Body>
+                    <lable>Search: </lable>
+                    <input type="input" name="input" onChange={handleChange} value={options.input} required></input>
+                    <select onChange={handleChange} name="select">
+                        <option value="music" >music</option>
+                        <option value="movie" >movie</option>
+                        <option value="podcast" >podcast</option>
+                        <option value="musicVideo" >Music Video</option>
+                        <option value="audiobook" >audio book</option>
+                        <option value="shortFilm" >short Film</option>
+                        <option value="tv Show" >tv Show</option>
+                        <option value="software" >software</option>
+                        <option value="ebook" >ebook</option>
+                    </select>
+                    <Button className="button" type="submit" variant="success" >Search</Button>
+                </Card.Body>
+            </Card>
         </form>
     );
 }
