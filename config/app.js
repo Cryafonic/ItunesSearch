@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(helmet());
 
 async function fetchingSearchData(term, media) { 
-    const URL = `https://itunes.apple.com/search?term=${term}&&media=${media}&&limit=25`;
+    const URL = `https://itunes.apple.com/search?term=${term}&&media=${media}&&limit=30`;
     try{
         const response = await fetch(URL).then(res => res.json());
         return response;
@@ -34,9 +34,10 @@ app.get("/search/results", (req, res)=> {
 app.post("/search/", (req , res) => {
     const bodyResponse = req.body.sendOptions
     console.log(bodyResponse);
-    fetchingSearchData(bodyResponse.input, bodyResponse.select)
+    fetchingSearchData(encodeURI(bodyResponse.input), bodyResponse.select)
         .then(res => {
-            fs.writeFile('itunesResponse.json', JSON.stringify(res), (err) => {
+            const uniqueRes = Array.from(new Set(res.results.map(a => a.artistId))).map(id => {return res.results.find(a => a.artistId === id)})
+            fs.writeFile('itunesResponse.json', JSON.stringify(uniqueRes), (err) => {
                 if (err) return console.log(err);
             });
         });
