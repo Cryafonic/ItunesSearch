@@ -7,13 +7,14 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-
 // TODO: fix refresh issue
+/* TODO: styling */
 
 function App() {
   const [itunesData, setItunesData] = useState(null);
   const [loaded, setLoaded] = useState(false);
   const [show, setShow] = useState(false);
+  const [favList, setFavList] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -30,6 +31,14 @@ function App() {
       });
     }
   },[itunesData]);
+
+  function addToFav(id) {
+    itunesData.forEach((item) => {
+      if (item.artistId === id) {
+        setFavList(() => favList.concat(item));
+      }
+    })
+  }
   
   if (!loaded){
     return(
@@ -39,12 +48,20 @@ function App() {
     return(
       <>
         <Modal show={show} onHide={handleClose}>
+          <Modal.Header>
+            Favourites list
+          </Modal.Header>
+          <Modal.Body>
+            {/* TODO: fix the diplay bug of the fav list in state. */}
+            {favList.forEach((item) => {
+              <p>{item.artistName}</p>
+            })}
+          </Modal.Body>
           <Button variant="primary" onClick={handleClose}>
             close
           </Button>
-          {/* TODO: map over all the objects that have been added to the array and been removed. */}
         </Modal>
-        {/* TODO: style input field */}
+
         <FromInput />
         <Button variant="primary" onClick={handleShow}>
           View Favourites
@@ -61,8 +78,7 @@ function App() {
                         />
                         <Card.Title>{item.artistName}</Card.Title>
                         <Card.Text className="align-left">{item.collectionName}</Card.Text>
-                        {/* TODO: create add to fav function */}
-                        <Button variant="primary" >Add To Favourites</Button>
+                        <Button variant="primary" onClick={() => addToFav(item.artistId)} >Add To Favourites</Button>
                 </Card.Body>
               </Card>
              );
