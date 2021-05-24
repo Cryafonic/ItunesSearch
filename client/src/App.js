@@ -1,36 +1,56 @@
-import FromInput from "./components/formInput/FromInput";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { FetchOnURL } from "./components/fetchMethods/FetchOnURL";
+import { FetchParams } from "./components/fetchMethods/FetchParams";
+import FromInputClass from "./components/formInput/FormInputClass";
 import Loading from "./components/loading/Loading";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+
 
 // TODO: fix refresh issue
 /* TODO: styling */
 
 function App() {
-  const [itunesData, setItunesData] = useState(null);
+  const [itunesData, setItunesData] = useState([]);
   const [loaded, setLoaded] = useState(false);
-  const [show, setShow] = useState(false);
+  const [favToggle, setFavToggle] = useState(false);
   const [favList, setFavList] = useState([]);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   useEffect(() => {
     if  (!loaded){
-      FetchOnURL("/search/results").then(res => {
-          if (Object.keys(res).length !== 0) {
-            setItunesData(res);
-            setLoaded(true);
-          } else {
-            setLoaded(false);
-          }
-      });
+      fetchApi();
+      setLoaded(true);
     }
-  },[itunesData]);
+  });
+
+  function handlePost(sendPostOptions) {
+    console.log(sendPostOptions);
+        const options = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sendPostOptions)
+        };
+        FetchParams(options);
+  }
+
+  function fetchApi() {
+    FetchOnURL("/search/results").then(res => {
+      if (Object.keys(res).length !== 0) {
+        setItunesData([...res]);
+      }else {
+        setLoaded(false);
+      }
+    });
+  }
+
+  function handleFav() {
+    favToggle === true ? setFavToggle(false) : setFavToggle(true);
+  }
 
   function addToFav(id) {
     itunesData.forEach((item) => {
@@ -39,42 +59,65 @@ function App() {
       }
     })
   }
+
+  function removeFromFav(id) {
+    favList.forEach((item, index) => {
+      if (item.artistId === id ) {
+        favList.splice(index , 1);
+      }
+    })
+  }
   
   if (!loaded){
     return(
-      <Loading />
-    );
-  }else {
-    return(
       <>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header>
-            Favourites list
-          </Modal.Header>
-          <Modal.Body>
-            {/* TODO: fix the diplay bug of the fav list in state. */}
-            {favList.forEach((item) => {
-              <p>{item.artistName}</p>
-            })}
-          </Modal.Body>
-          <Button variant="primary" onClick={handleClose}>
-            close
+        <FromInputClass ituneSearch={handlePost} />
+        <Loading />
+      </>
+    );
+  }else if (favToggle) {
+    return(
+        <>  
+          <h1>Favourites list</h1>
+          <Button variant="primary" className="favPageButton" onClick={handleFav}>
+            Close Favourites
           </Button>
-        </Modal>
-
-        <FromInput />
-        <Button variant="primary" onClick={handleShow}>
-          View Favourites
-        </Button>
-          {
-            itunesData.map((item, key) => {
-             return(
-              <Card key={key}>
+          {favList.map((item) => {
+            return(
+              <Card key={item.artistId} >
                 <Card.Body>
                         <img
                           src={item.artworkUrl100}
                           height="100px"
                           width="100px"
+                          alt={item.artistName}
+                        />
+                        <Card.Title>{item.artistName}</Card.Title>
+                        <Card.Text className="align-left">{item.collectionName}</Card.Text>
+                        <Button variant="danger" onClick={() => removeFromFav(item.artistId)} >Remove</Button>
+                </Card.Body>
+              </Card>
+            );
+          })}
+        </>
+    );
+  }else {
+    return(
+      <>
+        <FromInputClass ituneSearch={handlePost} />
+        <Button variant="primary" className="favButton" onClick={handleFav}>
+          View Favourites
+        </Button>
+          {
+            itunesData.map((item) => {
+             return(
+              <Card key={item.artistId} >
+                <Card.Body>
+                        <img
+                          src={item.artworkUrl100}
+                          height="100px"
+                          width="100px"
+                          alt={item.artistName}
                         />
                         <Card.Title>{item.artistName}</Card.Title>
                         <Card.Text className="align-left">{item.collectionName}</Card.Text>
