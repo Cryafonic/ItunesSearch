@@ -32,7 +32,7 @@ app.get("/search/results", (req, res)=> {
 });
 
 app.post("/search/", (req , res) => {
-    const bodyResponse = req.body.sendOptions
+    const bodyResponse = req.body
     console.log(bodyResponse);
     fetchingSearchData(encodeURI(bodyResponse.input), bodyResponse.select)
         .then(res => {
