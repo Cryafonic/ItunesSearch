@@ -53,9 +53,11 @@ function App() {
   }
 
   function addToFav(id) {
+    let set = new Set(favList);
     itunesData.forEach((item) => {
       if (item.artistId === id) {
-        setFavList(() => favList.concat(item));
+        let filter = set.add(item)
+        setFavList(Array.from(filter));
       }
     })
   }
