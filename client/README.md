@@ -1,70 +1,52 @@
-# Getting Started with Create React App
+#### Contents
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+| Description         | how to use                 | security                  |
+| ------------------- | -------------------------- | ------------------------- |
+| Project explanation | Development/end-user usage | how security is delt with |
 
-## Available Scripts
+# Itunes search
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+Another demonstration of how my skills as a developer have improved. The goal of this project is to build a working Itunes store search app with the use of a back-end that handles
+the API calls. You can use this website to search for anything in the iTunes stores by entering a search term and a media selection.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## How to use
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Development
 
-### `npm test`
+1. Clone the repository to your local manchine by using ```git clone "repo link"``` in the command line.
+    ![clone](/git_images/clone.PNG)
+  1.1 if you don't have git install use the following link: https://git-scm.com/downloads
+2. To continue with development, all you need is to open the specified files with your favourite text editor or IDE.  
+    ![open](/git_images/open.PNG)
+    2.1 just remember to always when start with a nodejs project to run ```npm intall``` and ```npm run client-install``` in the back-end folder
+    ![install](/git_images/install.PNG)
+    2.2 if you don't have node installed please visit https://nodejs.org/en/download/
+3. To test the product you can run ```npm test``` to run the exsisting tests.
+    ![backEndTest](/git_images/back-end_test.PNG)
+    ![frontEndTest](/git_images/front-end_test.PNG)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Visual Studio Code: https://code.visualstudio.com/download
 
-### `npm run build`
+### Using the product
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository to your local manchine by using ```git clone "repo link"``` in the command line.
+    ![clone](/git_images/clone.PNG)
+  1.1 if you don't have git install use the following link: https://git-scm.com/downloads
+2. By using the command ```npm start``` after the intructions in the development section you will be able to start the program.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### How it works:
+    *On the first page there is a search bar when you enter a search term and select a media option then press search you will be able to search any item in the iTunes store.
+    *In every item there is a favourites button that you can add a item to the list of favourites.
+    *When clicking on the button of favourites you will be able to see the the list of item that you have added to it.
+    *All the items also have a remove button so that you can remove the items from there.
+    *By clicking the close favourites button you will be able to go back to the main search page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Security
 
-### `npm run eject`
+    *All security is handle by Helmet that is used at the start of the application.
+    *The end point does not require the use of an API key but the API calls are all still handle in the back-end of the application.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Deployed App link.
+    ""
