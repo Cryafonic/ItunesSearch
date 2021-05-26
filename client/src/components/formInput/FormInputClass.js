@@ -11,7 +11,6 @@ export default class FormInputClass extends Component{
     }
 
     handleValueChange = (e) => {
-        console.log(this.state);
         const value = e.target.value
         this.setState({
             ...this.state,
