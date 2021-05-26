@@ -2,7 +2,7 @@ const helmet = require('helmet');
 const express = require('express');
 const fs = require("fs");
 const fetch = require("node-fetch");
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8080;
 // initializes express in app.
 const app = express();
 
@@ -47,6 +47,12 @@ app.post("/search/", (req , res) => {
 // start the server on port 8080 if there is no env specificed.
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
+    if (process.env.NODE_ENV === 'production'){
+            app.use(express.static(path.join(__dirname, 'client/build')));
+            app.get('*',(req,res)=> {res.sendFile(path.resolve(__dirname,
+            'client', 'build','index.html'));
+        });
+    }
 });
 
 module.exports = app;
