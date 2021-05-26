@@ -9,16 +9,13 @@ import Card from 'react-bootstrap/Card';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
-
-// TODO: fix refresh issue
-/* TODO: styling */
-
 function App() {
   const [itunesData, setItunesData] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [favToggle, setFavToggle] = useState(false);
   const [favList, setFavList] = useState([]);
 
+  // mounts on first load and unmounts when the useEffect is at the cleanup() function.
   useEffect(() => {
     let mounted = true
     if (mounted) {
@@ -30,6 +27,7 @@ function App() {
     }
   },[]);
 
+  // handles the method options send to the back-end.
   function handlePost(sendPostOptions) {
         const options = {
             method: "POST",
@@ -41,6 +39,7 @@ function App() {
         FetchParams(options);
   }
 
+  // handle the fetch to the back of the application.
   function fetchApi() {
     FetchOnURL("/search/results").then(res => {
       if (Object.keys(res).length !== 0) {
@@ -52,10 +51,12 @@ function App() {
     });
   }
 
+  // handles the state to load the favourites page or to load a different page.
   function handleFav() {
     favToggle === true ? setFavToggle(false) : setFavToggle(true);
   }
 
+  // handles the add to the favourites list.
   function addToFav(id) {
     let set = new Set(favList);
     itunesData.forEach((item) => {
@@ -66,6 +67,7 @@ function App() {
     })
   }
 
+  // handles the remove of a favourites list item.
   function removeFromFav(id) {
     favList.forEach((item, index) => {
       if (item.artistId === id ) {
@@ -74,6 +76,7 @@ function App() {
     })
   }
   
+  // using condisional rendering to determen which component to render with the value of state.
   if (!loaded){
     return(
       <>

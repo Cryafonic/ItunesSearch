@@ -1,18 +1,17 @@
 const helmet = require('helmet');
 const express = require('express');
-// const router = express.Router();
 const fs = require("fs");
 const fetch = require("node-fetch");
 const PORT = process.env.PORT || 8080
-
+// initializes express in app.
 const app = express();
 
+// accetps the data sent from body and also secures the app by using helmet.
 app.use(express.urlencoded({ extended: false }));
-
 app.use(express.json());
-
 app.use(helmet());
 
+// fetch that handles the call to the api end-point
 async function fetchingSearchData(term, media) { 
     const URL = `https://itunes.apple.com/search?term=${term}&&media=${media}&&limit=30`;
     try{
@@ -23,6 +22,7 @@ async function fetchingSearchData(term, media) {
     }
 }
 
+//handles the get method for the data that is in itunesReponse.json
 app.get("/search/results", (req, res)=> {
     fs.readFile('itunesResponse.json', (err, data) => {
         if (err) res.send("file not found.");
@@ -31,6 +31,7 @@ app.get("/search/results", (req, res)=> {
     });
 });
 
+// takes information form the body then call the data to be placed in the file call itunesRepsonse.json.
 app.post("/search/", (req , res) => {
     const bodyResponse = req.body
     console.log(bodyResponse);
@@ -43,6 +44,7 @@ app.post("/search/", (req , res) => {
         });
 });
 
+// start the server on port 8080 if there is no env specificed.
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

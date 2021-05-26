@@ -1,3 +1,4 @@
+// fetch that takes string argument
 async function FetchOnURL(URL) {
     try {
         const response = await fetch(URL);

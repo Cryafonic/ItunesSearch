@@ -10,6 +10,7 @@ export default class FormInputClass extends Component{
         select: 'all'
     }
 
+    // handles the value when it changes
     handleValueChange = (e) => {
         const value = e.target.value
         this.setState({
@@ -18,6 +19,7 @@ export default class FormInputClass extends Component{
         })
     }
 
+    // lifting state up to be access on the top level.
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.ituneSearch(this.state);
@@ -26,12 +28,12 @@ export default class FormInputClass extends Component{
         });
     }
 
+    // renders the input and dropdown to the DOM.
     render() {
-        // console.log(this.state.input);
         return (
             <form onSubmit={this.handleSubmit} >
 
-                        <input 
+                        <input
                             className="search"
                             type="text" 
                             name="input"
@@ -53,9 +55,8 @@ export default class FormInputClass extends Component{
                             <option value="software" >Software</option>
                             <option value="ebook" >Ebook</option>
                         </select>
-                        <Button 
-                            // className="searchButton"
-                            type="submit" 
+                        <Button
+                            type="submit"
                             variant="success"
                             value="Search"
                         >Search</Button>

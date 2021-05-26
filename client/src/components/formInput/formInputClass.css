@@ -1,3 +1,4 @@
+/* styling the input and dropdown fix full and moblie screens */
 .search {
     width: 20%;
     margin: 1% 0.2% 1% 2%;
@@ -20,6 +21,7 @@ form {
     border-bottom: lightgray solid 1px ;
 }
 
+/* all media queries to scale for mobile devices */
 @media only screen and (max-width: 1030px) {
     .search {
         width: 200px;
