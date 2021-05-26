@@ -9,7 +9,8 @@
     "client": "cd client && npm start",
     "altserver": "cd config && nodemon app.js",
     "server": "nodemon server.js",
-    "start": "concurrently \"npm run client\" \"npm run altserver\""
+    "start": "concurrently \"npm run client\" \"npm run altserver\"",
+    "heroku-postbuild": "npm install && npm run client-install"
   },
   "author": "",
   "license": "ISC",
