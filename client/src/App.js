@@ -20,14 +20,17 @@ function App() {
   const [favList, setFavList] = useState([]);
 
   useEffect(() => {
-    if  (!loaded){
-      fetchApi();
-      setLoaded(true);
+    let mounted = true
+    if (mounted) {
+        fetchApi();
     }
-  });
+
+    return function cleanup() {
+      mounted = false
+    }
+  },[]);
 
   function handlePost(sendPostOptions) {
-    console.log(sendPostOptions);
         const options = {
             method: "POST",
             headers: {
@@ -42,6 +45,7 @@ function App() {
     FetchOnURL("/search/results").then(res => {
       if (Object.keys(res).length !== 0) {
         setItunesData([...res]);
+        setLoaded(true);
       }else {
         setLoaded(false);
       }
@@ -110,8 +114,7 @@ function App() {
         <Button variant="primary" className="favButton" onClick={handleFav}>
           View Favourites
         </Button>
-          {
-            itunesData.map((item) => {
+          {itunesData.map((item) => {
              return(
               <Card key={item.artistId} >
                 <Card.Body>
