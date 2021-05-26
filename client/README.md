@@ -16,23 +16,23 @@ the API calls. You can use this website to search for anything in the iTunes sto
 ### Development
 
 1. Clone the repository to your local manchine by using ```git clone "repo link"``` in the command line.
-    ![clone](/git_images/clone.PNG)
+    ![clone](./git_images/clone.PNG)
   1.1 if you don't have git install use the following link: https://git-scm.com/downloads
 2. To continue with development, all you need is to open the specified files with your favourite text editor or IDE.  
-    ![open](/git_images/open.PNG)
+    ![open](./git_images/open.PNG)
     2.1 just remember to always when start with a nodejs project to run ```npm intall``` and ```npm run client-install``` in the back-end folder
-    ![install](/git_images/install.PNG)
+    ![install](./git_images/install.PNG)
     2.2 if you don't have node installed please visit https://nodejs.org/en/download/
 3. To test the product you can run ```npm test``` to run the exsisting tests.
-    ![backEndTest](/git_images/back-end_test.PNG)
-    ![frontEndTest](/git_images/front-end_test.PNG)
+    ![backEndTest](./git_images/back-end_test.PNG)
+    ![frontEndTest](./git_images/front-end_test.PNG)
 
 Visual Studio Code: https://code.visualstudio.com/download
 
 ### Using the product
 
 1. Clone the repository to your local manchine by using ```git clone "repo link"``` in the command line.
-    ![clone](/git_images/clone.PNG)
+    ![clone](./git_images/clone.PNG)
   1.1 if you don't have git install use the following link: https://git-scm.com/downloads
 2. By using the command ```npm start``` after the intructions in the development section you will be able to start the program.
 
