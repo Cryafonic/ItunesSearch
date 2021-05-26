@@ -27,7 +27,7 @@ app.get("/search/results", (req, res)=> {
     fs.readFile('itunesResponse.json', (err, data) => {
         if (err) res.send("file not found.");
         else 
-            res.send(JSON.parse(data));
+            res.send(`${data}`);
     });
 });
 
@@ -46,3 +46,5 @@ app.post("/search/", (req , res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+module.exports = app;
