@@ -4,16 +4,22 @@
   "description": "search for items in the app store ",
   "main": "app.js",
   "scripts": {
+    "test": "mocha Test",
     "client-install": "cd client && npm install",
-    "start": "nodemon server.js"
+    "client": "cd client && npm start",
+    "altserver": "cd config && nodemon app.js",
+    "server": "nodemon server.js",
+    "start": "concurrently \"npm run client\" \"npm run altserver\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.5",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "concurrently": "^6.1.0",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
-    "morgan": "^1.10.0",
+    "mocha": "^8.4.0",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.7"
   }

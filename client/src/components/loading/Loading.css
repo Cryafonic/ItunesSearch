@@ -1,0 +1,13 @@
+/* sets the pinnner to a certain size and set to middle */
+.spinner {
+    margin: 8% 32%;
+    padding: 15%;
+}
+
+
+/* align the words with the spinner */
+.loading {
+    position: absolute;
+    margin: 7% 29%;
+    padding: 15%;
+}
